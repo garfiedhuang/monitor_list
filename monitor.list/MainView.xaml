@@ -1,0 +1,242 @@
+﻿<Window x:Class="Xp.Resin.Print.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Height="850"
+        Width="1350" 
+        FontFamily="Microsoft Yahei"
+        x:Name="frmMainView"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="{x:Null}" Icon="/Assets/Images/icon.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="20"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="RowHeaderWidth" Value="0"></Setter>
+            <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+            <Setter Property="CanUserAddRows" Value="False"></Setter>
+            <Setter Property="CanUserResizeColumns" Value="False"></Setter>
+            <Setter Property="CanUserResizeRows" Value="False"></Setter>
+            <Setter Property="HorizontalGridLinesBrush" Value="LightGray"></Setter>
+            <Setter Property="VerticalGridLinesBrush" Value="LightGray"></Setter>
+            <Setter Property="IsReadOnly" Value="True"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+            <Setter Property="RowHeight" Value="40"></Setter>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"></Setter>
+        </Style>
+
+        <!--DataGrid表头样式-->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Height" Value="45"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,1,1"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <!--DataGrid行头样式-->
+        <Style TargetType="DataGridRowHeader">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <!-- DataGridTextColumn 文字居中 -->
+        <Style x:Key="CenterAlignmentStyle" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="CenterAlignmentStyle2" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+    <Border Margin="5"  CornerRadius="0" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="White">
+        <Border.Effect>
+            <DropShadowEffect Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.5" Direction="0"/>
+        </Border.Effect>
+        <Grid x:Name="gdFirst">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="White" Panel.ZIndex="998" Grid.Row="0" BorderThickness="0" BorderBrush="{x:Null}" CornerRadius="0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#001529" ShadowDepth="3" BlurRadius="5" Opacity="0.08" Direction="315"/>
+                </Border.Effect>
+                <UniformGrid VerticalAlignment="Center" Height="40" Margin="0" Columns="2">
+                    <StackPanel Orientation="Horizontal" Margin="5 0 0 0" VerticalAlignment="Center">
+                        <Border Background="Transparent" Name="back">
+                            <WrapPanel>
+                                <Image Source="/Assets/Images/icon.ico" Width="25" Height="25" />
+                                <TextBlock x:Name="tbTitle" FontSize="18" Foreground="#5a5e66" Margin="5 0 0 0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            </WrapPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Margin="0 0 15 0">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button Content="&#xe602;" Foreground="#5a5e66" Click="MinWin_click" Style="{StaticResource ControlBtnStyle}"/>
+                            <Button Content="&#xe601;" Foreground="#5a5e66" Click="MaxWin_click" Style="{StaticResource ControlBtnStyle}"/>
+                            <Button Content="&#xe675;" Foreground="#5a5e66" Click="CloseWin_click" Style="{StaticResource ControlBtnStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </UniformGrid>
+            </Border>
+            <Grid x:Name="gdSecond" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid x:Name="gdThird" Grid.Row="0" Margin="0,30,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Background="White" Margin="30,0,30,0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="LightGray">
+                        <UniformGrid Grid.Row="0" Columns="2">
+                            <WrapPanel HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="入户名单监控" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding BaseModel.PrintTaskTips}" FontSize="16" Foreground="Orange" Margin="30,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            </WrapPanel>
+                            <WrapPanel HorizontalAlignment="Right" Margin="0,0,30,0" VerticalAlignment="Center" Grid.Column="1">
+                                <!--<Button x:Name="btnPrintTest" Margin="3" Width="100" Content="打印测试" Style="{StaticResource AddBtnStyle}" Visibility="{Binding BaseModel.VisibilityModel, Mode=TwoWay}" Command="{Binding PrintTestCmd}"/>
+                                <Button x:Name="btnAdd" Margin="3" Width="100" Content="新增" Style="{StaticResource AddBtnStyle}" Visibility="{Binding BaseModel.VisibilityModel, Mode=TwoWay}" Command="{Binding AddCmd}"/>-->
+                                <Button x:Name="btnMaintenance" Margin="3" Width="100" Content="{Binding BaseModel.MaintenanceBtnContent,Mode=TwoWay}" Style="{StaticResource EditBtnStyle}" Click="btnMaintenance_Click"/>
+                            </WrapPanel>
+                        </UniformGrid>
+                    </Border>
+                    <StackPanel Grid.Row="1" Margin="30,20,30,0">
+                        <UniformGrid Grid.Row="0" Columns="4">
+                            <WrapPanel Margin="2" Grid.Column="0">
+                                <hc:TextBox Width="280" Margin="5,0,0,15"
+                                                x:Name="txtName" 
+                                                hc:TitleElement.TitleWidth="80"
+                                                hc:TitleElement.HorizontalAlignment="Right"
+                                                hc:TitleElement.TitlePlacement="Left" 
+                                                hc:InfoElement.Placeholder="请输入姓名" 
+                                                Text="{Binding BaseModel.Name,Mode=TwoWay}" 
+                                                hc:InfoElement.Title="姓名：" 
+                                                hc:InfoElement.Necessary="False"/>
+                                <hc:TextBox Width="280" Margin="5,0,0,15"
+                                                x:Name="txtUnit" 
+                                                hc:TitleElement.TitleWidth="80"
+                                                hc:TitleElement.HorizontalAlignment="Right"
+                                                hc:TitleElement.TitlePlacement="Left" 
+                                                hc:InfoElement.Placeholder="请输入单位名称" 
+                                                Text="{Binding BaseModel.Unit,Mode=TwoWay}" 
+                                                hc:InfoElement.Title="单位名称：" 
+                                                hc:InfoElement.Necessary="False"/>
+                            </WrapPanel>
+                            <WrapPanel Margin="2" Grid.Column="0">
+                                <hc:TextBox Width="280" Margin="5,0,0,15"
+                                                x:Name="txtResult" 
+                                                hc:TitleElement.TitleWidth="80"
+                                                hc:TitleElement.HorizontalAlignment="Right"
+                                                hc:TitleElement.TitlePlacement="Left" 
+                                                hc:InfoElement.Placeholder="请输入批复结果" 
+                                                Text="{Binding BaseModel.Result,Mode=TwoWay}" 
+                                                hc:InfoElement.Title="批复结果：" 
+                                                hc:InfoElement.Necessary="False"/>
+                                <hc:TextBox Width="280" Margin="5,0,0,15"
+                                                x:Name="txtApprovalUnit" 
+                                                hc:TitleElement.TitleWidth="80"
+                                                hc:TitleElement.HorizontalAlignment="Right"
+                                                hc:TitleElement.TitlePlacement="Left" 
+                                                hc:InfoElement.Placeholder="请输入审批单位" 
+                                                Text="{Binding BaseModel.ApprovalUnit,Mode=TwoWay}" 
+                                                hc:InfoElement.Title="审批单位：" 
+                                                hc:InfoElement.Necessary="False"/>
+                            </WrapPanel>
+                            <WrapPanel Margin="2" Grid.Column="0">
+                                <hc:TextBox Width="280" Margin="5,0,0,15"
+                                                x:Name="txtNoticeDate" 
+                                                hc:TitleElement.HorizontalAlignment="Right"
+                                                hc:TitleElement.TitleWidth="80"
+                                                hc:TitleElement.TitlePlacement="Left" 
+                                                hc:InfoElement.Placeholder="请选择公示日期" 
+                                                Text="{Binding BaseModel.NoticeDate,Mode=TwoWay}" 
+                                                hc:InfoElement.Title="公示日期：" 
+                                                hc:InfoElement.Necessary="False"/>
+                            </WrapPanel>
+
+                            <StackPanel Margin="0,0,30,0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Vertical">
+                                <Button x:Name="btnQuery" Margin="2,0,0,15" Width="100" Content="查询" Style="{StaticResource ButtonPrimary}"  Command="{Binding QueryCmd}"/>
+                                <Button x:Name="btnReset" Margin="2,0,0,15" Width="100" Content="重置" Command="{Binding ResetCmd}"/>
+                            </StackPanel>
+
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+
+                <hc:TabControl Margin="30,0,30,20" Grid.Row="1" IsAnimationEnabled="True" ShowCloseButton="True" IsDraggable="True" IsTabFillEnabled="False">
+                    <hc:TabItem Header="入户明细">
+                        <hc:SimplePanel Background="{DynamicResource RegionBrush}">
+
+                            <DataGrid Margin="10,10,10,10" Height="auto" 
+                                          Background="White"
+                                          x:Name="dgDetails"
+                                          hc:Empty.ShowEmpty="True"
+                                          HeadersVisibility="Column"
+                                          SelectionMode="Single"
+                                          ItemsSource="{Binding DetailGridData}" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Name}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="姓名"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding Unit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="单位名称"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="100" Binding="{Binding Result}" ElementStyle="{StaticResource CenterAlignmentStyle2}" Header="批复结果"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批单位"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeStartTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeStartTime" Header="公示开始时间"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeEndTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeEndTime" Header="公示结束时间"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <hc:Pagination x:Name="dgPagination"
+                       Grid.Row="2" 
+                       MaxPageCount="{Binding PageModel.MaxPageCount}" 
+                       PageIndex="{Binding PageModel.PageIndex}" 
+                       DataCountPerPage="{Binding PageModel.DataCountPerPage}" 
+                       IsJumpEnabled="True" 
+                       HorizontalAlignment="Center" 
+                       Margin="20,0,20,5">
+                                <hc:Interaction.Triggers>
+                                    <hc:EventTrigger EventName="PageUpdated">
+                                        <hc:EventToCommand  PassEventArgsToCommand="True" Command="{Binding PageUpdatedCommand}" />
+                                    </hc:EventTrigger>
+                                </hc:Interaction.Triggers>
+                            </hc:Pagination>
+
+                        </hc:SimplePanel>
+                    </hc:TabItem>
+                    <hc:TabItem IsSelected="True" Header="汇总统计">
+                        <DataGrid Margin="10,10,10,10" Height="auto" 
+                                          Background="White"
+                                          x:Name="dgSummary"
+                                          hc:Empty.ShowEmpty="True"
+                                          HeadersVisibility="Column"
+                                          SelectionMode="Single"
+                                          ItemsSource="{Binding SummaryGridData}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
+                                <DataGridTextColumn IsReadOnly="True" Width="200" Binding="{Binding NoticeDate, StringFormat=\{0:yyyy-MM-dd\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeDate" Header="公示日期"/>
+                                <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批单位"/>
+                                <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Sum}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批数量"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </hc:TabItem>
+                </hc:TabControl>
+
+            </Grid>
+        </Grid>
+
+    </Border>
+</Window>
