@@ -96,7 +96,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="50"></RowDefinition>
+                    <!--<RowDefinition Height="50"></RowDefinition>-->
                 </Grid.RowDefinitions>
                 <Grid x:Name="gdThird" Grid.Row="0" Margin="0,30,0,0">
                     <Grid.RowDefinitions>
@@ -104,17 +104,26 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Border Background="White" Margin="30,0,30,0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="LightGray">
-                        <UniformGrid Grid.Row="0" Columns="2">
-                            <WrapPanel HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" Grid.Column="0">
-                                <TextBlock Text="入户名单监控" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding BaseModel.PrintTaskTips}" FontSize="16" Foreground="Orange" Margin="30,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <WrapPanel HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2" Margin="30,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="数据入库提示" FontSize="16" />
+                                <TextBlock Text="{Binding BaseModel.DataTips}" FontSize="16" Foreground="Orange" Margin="30,0,0,0" />
                             </WrapPanel>
-                            <WrapPanel HorizontalAlignment="Right" Margin="0,0,30,0" VerticalAlignment="Center" Grid.Column="1">
+                            <WrapPanel HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,30,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding BaseModel.SummaryTips}" FontSize="16" Foreground="Blue"/>
                                 <!--<Button x:Name="btnPrintTest" Margin="3" Width="100" Content="打印测试" Style="{StaticResource AddBtnStyle}" Visibility="{Binding BaseModel.VisibilityModel, Mode=TwoWay}" Command="{Binding PrintTestCmd}"/>
-                                <Button x:Name="btnAdd" Margin="3" Width="100" Content="新增" Style="{StaticResource AddBtnStyle}" Visibility="{Binding BaseModel.VisibilityModel, Mode=TwoWay}" Command="{Binding AddCmd}"/>-->
-                                <Button x:Name="btnMaintenance" Margin="3" Width="100" Content="{Binding BaseModel.MaintenanceBtnContent,Mode=TwoWay}" Style="{StaticResource EditBtnStyle}" Click="btnMaintenance_Click"/>
+                                <Button x:Name="btnAdd" Margin="3" Width="100" Content="新增" Style="{StaticResource AddBtnStyle}" Visibility="{Binding BaseModel.VisibilityModel, Mode=TwoWay}" Command="{Binding AddCmd}"/>
+                                <Button x:Name="btnMaintenance" Margin="3" Width="100" Content="{Binding BaseModel.MaintenanceBtnContent,Mode=TwoWay}" Style="{StaticResource EditBtnStyle}" Click="btnMaintenance_Click"/>-->
                             </WrapPanel>
-                        </UniformGrid>
+                        </Grid>
                     </Border>
                     <StackPanel Grid.Row="1" Margin="30,20,30,0">
                         <UniformGrid Grid.Row="0" Columns="4">
@@ -180,58 +189,64 @@
                 </Grid>
 
                 <hc:TabControl Margin="30,0,30,20" Grid.Row="1" IsAnimationEnabled="True" ShowCloseButton="True" IsDraggable="True" IsTabFillEnabled="False">
-                    <hc:TabItem Header="入户明细">
+                    <hc:TabItem IsSelected="True" Header="采集明细">
                         <hc:SimplePanel Background="{DynamicResource RegionBrush}">
+                            <Grid x:Name="gdFive" Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                            <DataGrid Margin="10,10,10,10" Height="auto" 
+                                <DataGrid Grid.Row="0" Margin="10,10,10,10" Height="auto" 
                                           Background="White"
                                           x:Name="dgDetails"
                                           hc:Empty.ShowEmpty="True"
                                           HeadersVisibility="Column"
                                           SelectionMode="Single"
                                           ItemsSource="{Binding DetailGridData}" >
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Name}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="姓名"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding Unit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="单位名称"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="100" Binding="{Binding Result}" ElementStyle="{StaticResource CenterAlignmentStyle2}" Header="批复结果"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批单位"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeStartTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeStartTime" Header="公示开始时间"/>
-                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeEndTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeEndTime" Header="公示结束时间"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <hc:Pagination x:Name="dgPagination"
-                       Grid.Row="2" 
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Name}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="姓名"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding Unit}" ElementStyle="{StaticResource CenterAlignmentStyle2}" Header="单位名称"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="100" Binding="{Binding Result}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="批复结果"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle2}" Header="审批单位"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeStartTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeStartTime" Header="公示开始时间"/>
+                                        <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding NoticeEndTime, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeEndTime" Header="公示结束时间"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <hc:Pagination Grid.Row="1" x:Name="dgPagination"
                        MaxPageCount="{Binding PageModel.MaxPageCount}" 
                        PageIndex="{Binding PageModel.PageIndex}" 
                        DataCountPerPage="{Binding PageModel.DataCountPerPage}" 
                        IsJumpEnabled="True" 
                        HorizontalAlignment="Center" 
                        Margin="20,0,20,5">
-                                <hc:Interaction.Triggers>
-                                    <hc:EventTrigger EventName="PageUpdated">
-                                        <hc:EventToCommand  PassEventArgsToCommand="True" Command="{Binding PageUpdatedCommand}" />
-                                    </hc:EventTrigger>
-                                </hc:Interaction.Triggers>
-                            </hc:Pagination>
-
+                                    <hc:Interaction.Triggers>
+                                        <hc:EventTrigger EventName="PageUpdated">
+                                            <hc:EventToCommand  PassEventArgsToCommand="True" Command="{Binding PageUpdatedCommand}" />
+                                        </hc:EventTrigger>
+                                    </hc:Interaction.Triggers>
+                                </hc:Pagination>
+                            </Grid>
                         </hc:SimplePanel>
                     </hc:TabItem>
-                    <hc:TabItem IsSelected="True" Header="汇总统计">
-                        <DataGrid Margin="10,10,10,10" Height="auto" 
+                    <hc:TabItem Header="汇总统计">
+                        <hc:SimplePanel Background="{DynamicResource RegionBrush}">
+                            <DataGrid Margin="10,10,10,10" Height="auto" 
                                           Background="White"
                                           x:Name="dgSummary"
                                           hc:Empty.ShowEmpty="True"
                                           HeadersVisibility="Column"
                                           SelectionMode="Single"
                                           ItemsSource="{Binding SummaryGridData}" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
-                                <DataGridTextColumn IsReadOnly="True" Width="200" Binding="{Binding NoticeDate, StringFormat=\{0:yyyy-MM-dd\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeDate" Header="公示日期"/>
-                                <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批单位"/>
-                                <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Sum}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批数量"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn IsReadOnly="True" Width="50" Binding="{Binding RowNum}" ElementStyle="{StaticResource CenterAlignmentStyle}" CanUserSort="False" CanUserResize="False" Header="序号"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="200" Binding="{Binding NoticeDate, StringFormat=\{0:yyyy-MM-dd\}, Mode=OneWay}" ElementStyle="{StaticResource CenterAlignmentStyle}" SortMemberPath="NoticeDate" Header="公示日期"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="200*" Binding="{Binding ApprovalUnit}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批单位"/>
+                                    <DataGridTextColumn IsReadOnly="True" Width="150" Binding="{Binding Summary}" ElementStyle="{StaticResource CenterAlignmentStyle}" Header="审批数量"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </hc:SimplePanel>
                     </hc:TabItem>
                 </hc:TabControl>
 

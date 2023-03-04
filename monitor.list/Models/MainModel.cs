@@ -73,13 +73,21 @@ namespace Xp.Resin.Print.Models
         }
 
         /// <summary>
-        /// 打印任务提示
+        /// 数据入库提示
         /// </summary>
-        private string printTaskTips;
-        public string PrintTaskTips
-        {
-            get { return printTaskTips; }
-            set { printTaskTips = value; RaisePropertyChanged(); }
+        private string dataTips = "数据采集中，请等待处理...";
+        public string DataTips {
+            get { return dataTips; }
+            set { dataTips = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 汇总提示
+        /// </summary>
+        private string summaryTips;
+        public string SummaryTips {
+            get { return summaryTips; }
+            set { summaryTips = value; RaisePropertyChanged(); }
         }
 
         /// <summary>
@@ -223,6 +231,17 @@ namespace Xp.Resin.Print.Models
         /// 告示结束时间
         /// </summary>
         public DateTime NoticeEndTime { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateDt { get; set; }
+
+
+        /// <summary>
+        /// 审批日期
+        /// </summary>
+        public DateTime NoticeDt { get; set; }
 
     }
 
