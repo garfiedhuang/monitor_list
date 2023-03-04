@@ -1,8 +1,8 @@
-﻿using Xp.Resin.Print.Models;
+﻿using Monitor.List.Models;
 using System.Windows;
 using System.Text.RegularExpressions;
 
-namespace Xp.Resin.Print.Views.SystemMgt.Product
+namespace Monitor.List.Views.SystemMgt.Product
 {
     /// <summary>
     /// PrintView.xaml 的交互逻辑

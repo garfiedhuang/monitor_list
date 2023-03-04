@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using Xp.Resin.Print.ViewsModels;
+using Monitor.List.ViewsModels;
 
-namespace Xp.Resin.Print
+namespace Monitor.List
 {
     /// <summary>
     /// MainView.xaml 的交互逻辑

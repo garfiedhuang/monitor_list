@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Xp.Resin.Print.CustomControls.Views
+namespace Monitor.List.CustomControls.Views
 {
     /// <summary>
     /// MeterPlate.xaml 的交互逻辑

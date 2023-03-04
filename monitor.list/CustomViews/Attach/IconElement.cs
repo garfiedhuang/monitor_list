@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Xp.Resin.Print.CustomControls.Attach
+namespace Monitor.List.CustomControls.Attach
 {
      public class IconElement
     {

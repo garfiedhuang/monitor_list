@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public class ParameterConvert : IMultiValueConverter
     {

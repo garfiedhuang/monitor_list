@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public  class Win32Helper
     {

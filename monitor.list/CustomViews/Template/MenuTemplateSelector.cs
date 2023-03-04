@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Xp.Resin.Print.Models;
+using Monitor.List.Models;
 
-namespace Xp.Resin.Print.CustomControls.Template
+namespace Monitor.List.CustomControls.Template
 {
     public class MenuTemplateSelector: DataTemplateSelector
     {

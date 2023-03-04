@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public class PrinterHelper
     {

@@ -1,9 +1,9 @@
-﻿using Xp.Resin.Print.Common;
-using Xp.Resin.Print.Models;
+﻿using Monitor.List.Common;
+using Monitor.List.Models;
 using System;
 using System.Windows;
 
-namespace Xp.Resin.Print.Views.SystemMgt.Product
+namespace Monitor.List.Views.SystemMgt.Product
 {
     /// <summary>
     /// EditView.xaml 的交互逻辑

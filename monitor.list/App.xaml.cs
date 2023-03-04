@@ -3,9 +3,9 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
-using Xp.Resin.Print.Common;
+using Monitor.List.Common;
 
-namespace Xp.Resin.Print
+namespace Monitor.List
 {
     /// <summary>
     /// App.xaml 的交互逻辑
@@ -23,7 +23,7 @@ namespace Xp.Resin.Print
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            _appMutex = new Mutex(true, "Xp.Resin.Print", out var createdNew);
+            _appMutex = new Mutex(true, "Monitor.List", out var createdNew);
 
             if (!createdNew)
             {

@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace Xp.Resin.Print.Models
+namespace Monitor.List.Models
 {
     /// <summary>
     /// MainView模型

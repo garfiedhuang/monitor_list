@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 //using EQuality.Tools.Utility;
 using System;
-using Xp.Resin.Print.Common;
+using Monitor.List.Common;
 using System.Windows.Documents;
 
-namespace Xp.Resin.Print.Views.SystemMgt.Product
+namespace Monitor.List.Views.SystemMgt.Product
 {
     /// <summary>
     /// TestView.xaml 的交互逻辑

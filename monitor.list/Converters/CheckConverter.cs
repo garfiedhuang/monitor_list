@@ -1,4 +1,4 @@
-﻿//using Xp.Resin.Print.Views.CollectMgt.Parameter;
+﻿//using Monitor.List.Views.CollectMgt.Parameter;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Xp.Resin.Print.Converters
+namespace Monitor.List.Converters
 {
     public class CheckConverter : IValueConverter
     {

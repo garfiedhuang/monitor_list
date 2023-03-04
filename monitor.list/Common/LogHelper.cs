@@ -1,7 +1,7 @@
 ﻿using NLog;
 using System;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public class LogHelper
     {

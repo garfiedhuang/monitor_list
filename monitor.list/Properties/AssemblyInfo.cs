@@ -7,11 +7,11 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Xp.Resin.Print")]
+[assembly: AssemblyTitle("Monitor.List")]
 [assembly: AssemblyDescription("小鹏树脂车间打印客户端 by garfield")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("广州小鹏汽车科技有限公司")]
-[assembly: AssemblyProduct("Xp.Resin.Print")]
+[assembly: AssemblyProduct("Monitor.List")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

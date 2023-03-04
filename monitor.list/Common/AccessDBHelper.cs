@@ -4,7 +4,7 @@ using System.Data;
 using System.IO;
 using System.Collections;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     /// <summary>
     /// 数据访问基础类(基于OleDb) 

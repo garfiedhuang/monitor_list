@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Windows;
 
-namespace Xp.Resin.Print.ViewsModels
+namespace Monitor.List.ViewsModels
 {
     public class ViewModelLocator
     {

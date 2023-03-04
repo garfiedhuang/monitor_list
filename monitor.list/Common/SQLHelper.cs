@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     /// <summary>
     /// 数据库的通用访问代码 抽象类

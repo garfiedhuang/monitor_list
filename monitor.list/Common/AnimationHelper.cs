@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public class AnimationHelper
     {

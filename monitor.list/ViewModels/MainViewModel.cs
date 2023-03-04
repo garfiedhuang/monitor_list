@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Xp.Resin.Print.Models;
-using Xp.Resin.Print.Common;
+using Monitor.List.Models;
+using Monitor.List.Common;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Collections.Concurrent;
 
-namespace Xp.Resin.Print.ViewsModels {
+namespace Monitor.List.ViewsModels {
     public class MainViewModel : ViewModelBase {
         private static string _msg = "";
         private static List<ConfigModel> _configModels;

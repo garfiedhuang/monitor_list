@@ -1,4 +1,4 @@
-﻿using Xp.Resin.Print.Common;
+﻿using Monitor.List.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Xp.Resin.Print.Converters
+namespace Monitor.List.Converters
 {
     public class EnumConverter : IValueConverter
     {

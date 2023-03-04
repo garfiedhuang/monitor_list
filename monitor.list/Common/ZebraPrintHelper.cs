@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Xp.Resin.Print.Common
+namespace Monitor.List.Common
 {
     public class ZebraPrintHelper
     {
