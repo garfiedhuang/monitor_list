@@ -203,7 +203,7 @@ namespace Monitor.List.ViewsModels {
                     conditions.Append($" AND NOTICE_DATE LIKE '%{BaseModel.NoticeDate}%'");
                 }
 
-                var sql = $"SELECT * FROM MONITOR_LIST WHERE 1=1{conditions} ORDER BY CREATE_DT DESC";
+                var sql = $"SELECT * FROM MONITOR_LIST WHERE 1=1{conditions} ORDER BY NOTICE_START_TIME DESC";
 
                 using (var dt = OleDbHelper.DataTable(sql)) {
                     DetailModels.Clear();
@@ -324,11 +324,6 @@ namespace Monitor.List.ViewsModels {
                 var rowCount = 1;
 
                 foreach (var group in groupData) {
-                    //var key = group.Key.ToString().Split('-');
-
-                    //var date = key[0];
-                    //var approvalUnit = key[1];
-
                     SummaryGridData.Add(new SummaryModel() {
 
                         Id = group.Key.GetHashCode(),
@@ -340,15 +335,9 @@ namespace Monitor.List.ViewsModels {
                     });
 
                     rowCount++;
-
-                    /*
-                    Console.WriteLine(group.Key.ToString());
-                    foreach (var person in group)
-                    {
-                        Console.WriteLine($"\t{person.Name},{person.ApprovalUnit}");
-                    }
-                    */
                 }
+
+                _maxCollectTime = DetailModels.Max(m => m.NoticeStartTime);//最新一个公示时间 add by garfield 20230306
             }
         }
 
@@ -424,6 +413,7 @@ namespace Monitor.List.ViewsModels {
         private static int _totalPages = 0;
         private static List<string> _htmlData = new List<string>();
         private static ConcurrentDictionary<string, string> _totalData=new ConcurrentDictionary<string, string>();
+        private static DateTime _maxCollectTime = DateTime.MinValue;
 
         private void DoExecuteMonitor() {
 
@@ -466,6 +456,11 @@ namespace Monitor.List.ViewsModels {
                             approvalUnit = ms[3].Value;
                             noticeStartTime =Convert.ToDateTime(ms[4].Value);
                             noticeEndTime = Convert.ToDateTime(ms[5].Value);
+
+                            if (_maxCollectTime > noticeStartTime) {//add by garfield 20230306
+
+                                continue;
+                            }
 
                             var sql = $"SELECT ID FROM MONITOR_LIST WHERE FULL_NAME='{fullName}' AND UNIT='{unit}'";
                             var isExists = OleDbHelper.Exists(sql);

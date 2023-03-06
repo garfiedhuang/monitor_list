@@ -60,6 +60,20 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
+
+        <Style TargetType="DataGridRow">
+            <!--<Setter Property="Background" Value="#4400ffff"></Setter>-->
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Unit}" Value="广州小鹏汽车科技有限公司">
+                    <Setter Property="Background" Value="#3CB371"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Unit}" Value="广州小鹏自动驾驶科技有限公司">
+                    <Setter Property="Background" Value="#E6E6FA"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
     </Window.Resources>
     <Border Margin="5"  CornerRadius="0" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="White">
         <Border.Effect>
