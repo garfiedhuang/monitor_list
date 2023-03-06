@@ -393,13 +393,18 @@ namespace Monitor.List.ViewsModels {
                 var ms3 = regHtmlData.Matches(result);
 
                 var temp =string.Empty;
+                var regNoticeStartTime = new Regex("(?<=<td>)(.*?)(?=</td>)", RegexOptions.IgnoreCase);
+
                 foreach (var data in ms3) {
 
                     temp = data.ToString().Trim().Replace(" class=\"text-center\"", "");
 
                     if (!_totalData.ContainsKey(temp)) {
                         _totalData.TryAdd(temp, temp);
-                        _htmlData.Add(temp);
+
+                        var noticeStartTime = Convert.ToDateTime(regNoticeStartTime.Matches(temp)[4].Value);
+
+                        _htmlData.TryAdd(temp, noticeStartTime);
                     }
                     else {
                         continue;
@@ -411,8 +416,11 @@ namespace Monitor.List.ViewsModels {
         private static string _viewState = "/wEPDwUKLTczMzAxMTI0MQ8WCB4HUGFnZU51bQIBHglQYWdlQ291bnQCiAIeCFNRTFF1ZXJ5BfkBc2VsZWN0IHRvcCAxMCAqIGZyb20gKCBzZWxlY3Qgcm93X251bWJlcigpIG92ZXIgKCBvcmRlciBieSBFbmRQdWJsaWNpdHlUaW1lIGRlc2MsQnVzSUQgZGVzYykgYXMgdGVtcGlkLCogZnJvbSBCdXNpbmVzc19QZXJzb25JbnRyb2R1Y2VQdWJsaWNpdHlWaWV3IHdoZXJlIFByb2NJRCA9ICcyJyBhbmQgRW5kUHVibGljaXR5VGltZT4nMjAyMy8zLzMgMjI6MjA6MjMnICkgYXMgYSAgd2hlcmUgdGVtcGlkIGJldHdlZW4gezB9IGFuZCB7MX0gHglTUUxQYXJhbXMWABYCAgEPZBYIAgkPPCsACwEADxYIHghEYXRhS2V5cxYKBQblkLTnkbYFCeiwouaEj+iKsQUJ6buE5qWa54eVBQnolKHnp4DnkLQFCei1teS4gOmjngUG5rKI55C0BQnlkajkvJrnvqQFBuWNk+eQvAUJ5ZSQ5YWD5Y2OBQnlj7bmooXnkLQeC18hSXRlbUNvdW50AgofAQIBHhVfIURhdGFTb3VyY2VJdGVtQ291bnQCCmQWAmYPZBYUAgEPZBYMZg8PFgIeBFRleHQFBuWQtOeRtmRkAgEPDxYCHwcFIeW5v+W3nuWHr+S5i+a6kOenkeaKgOaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0M2RkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDNkZAICD2QWDGYPDxYCHwcFCeiwouaEj+iKsWRkAgEPDxYCHwcFKuW5v+W3nui+iea0quacuueUteiuvuWkh+W3peeoi+aciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0M2RkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDNkZAIDD2QWDGYPDxYCHwcFCem7hOalmueHlWRkAgEPDxYCHwcFM+i+vue+juS5kOavlOiQqO+8iOW5v+W3nu+8iemkkOmlrueuoeeQhuaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MmRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDJkZAIED2QWDGYPDxYCHwcFCeiUoeengOeQtGRkAgEPDxYCHwcFIeW5v+W3nui+vuWwlOaWh+enkeaKgOaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MmRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDJkZAIFD2QWDGYPDxYCHwcFCei1teS4gOmjnmRkAgEPDxYCHwcFM+W5v+W3nuW4guiNlOa5vuWMuuS6uuawkeaUv+W6nOWNjuael+ihl+mBk+WKnuS6i+WkhGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MWRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDFkZAIGD2QWDGYPDxYCHwcFBuayiOeQtGRkAgEPDxYCHwcFKuW5v+S4nOenkeaFp+S/oeaBr+acjeWKoeiCoeS7veaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MWRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDFkZAIHD2QWDGYPDxYCHwcFCeWRqOS8mue+pGRkAgEPDxYCHwcFHuW5v+W3nuS4reaYn+ijhemlsOaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MGRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDBkZAIID2QWDGYPDxYCHwcFBuWNk+eQvGRkAgEPDxYCHwcFKuW5v+W3numCpuiBmOS8geS4mueuoeeQhuWSqOivouaciemZkOWFrOWPuGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MGRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDBkZAIJD2QWDGYPDxYCHwcFCeWUkOWFg+WNjmRkAgEPDxYCHwcFJ+W5v+W3nuW4guiNlOa5vuWMuuS4jeWKqOS6p+eZu+iusOS4reW/g2RkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MGRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDBkZAIKD2QWDGYPDxYCHwcFCeWPtuaiheeQtGRkAgEPDxYCHwcFJOW5v+W3nuW4guiNlOa5vuWMuuWFseWIm+mAmuiur+WVhuihjGRkAgIPDxYCHwcFBuWQjOaEj2RkAgMPDxYCHwcFMOW5v+W3nuW4guiNlOa5vuWMuuS6uuWKm+i1hOa6kOWSjOekvuS8muS/nemanOWxgGRkAgQPDxYCHwcFFTIwMjPlubQz5pyIM+aXpSAxODo0MGRkAgUPDxYCHwcFFjIwMjPlubQz5pyIMTDml6UgMTg6NDBkZAILDw8WAh8HBQMyNjRkZAINDw8WAh4HRW5hYmxlZGhkZAIPDw8WAh8IaGRkZLf3BqpLcYaTxil0sxn/lig/M1heHeKGiw7pUh72pQ+p";
         private static string _toPage = "0";
         private static int _totalPages = 0;
-        private static List<string> _htmlData = new List<string>();
+        //private static List<string> _htmlData = new List<string>();
+
+        private static ConcurrentDictionary<string, DateTime> _htmlData = new ConcurrentDictionary<string, DateTime>();
         private static ConcurrentDictionary<string, string> _totalData=new ConcurrentDictionary<string, string>();
+
         private static DateTime _maxCollectTime = DateTime.MinValue;
 
         private void DoExecuteMonitor() {
@@ -446,7 +454,7 @@ namespace Monitor.List.ViewsModels {
                     if (_htmlData == null || _htmlData.Count == 0) {
                         continue;
                     }
-                    foreach (var dr in _htmlData) {
+                    foreach (var dr in _htmlData.OrderBy(o=>o.Value)) {
                         try {
 
                             msg = string.Empty;
@@ -455,7 +463,7 @@ namespace Monitor.List.ViewsModels {
 
                             //<td>吴瑶</td><td>广州凯之源科技有限公司</td><td class="text-center">同意</td><td>广州市荔湾区人力资源和社会保障局</td><td>2023年3月3日 18:43</td><td>2023年3月10日 18:43</td>                     
                             var reg =new Regex("(?<=<td>)(.*?)(?=</td>)", RegexOptions.IgnoreCase);
-                            var ms = reg.Matches(dr);
+                            var ms = reg.Matches(dr.Key);
 
                             fullName = ms[0].Value;
                             unit = ms[1].Value;
