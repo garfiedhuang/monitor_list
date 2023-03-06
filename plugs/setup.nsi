@@ -1,11 +1,11 @@
 ; 该脚本使用 HM VNISEdit 脚本编辑器向导产生
 
 ; 安装程序初始定义常量
-!define PRODUCT_NAME "Xp Resin Print"
+!define PRODUCT_NAME "Monitor List"
 !define PRODUCT_VERSION "1.0.0.0"
-!define PRODUCT_PUBLISHER "GuangZhou Xiaopeng Automobile Co., Ltd"
-!define PRODUCT_WEB_SITE "http://mes.xiaopeng.local"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\Xp.Resin.Print.exe"
+!define PRODUCT_PUBLISHER "GuangZhou Garfield Huang Co., Ltd"
+!define PRODUCT_WEB_SITE ""
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\Monitor.List.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
@@ -16,7 +16,7 @@ SetCompressor lzma
 
 ; MUI 预定义常量
 !define MUI_ABORTWARNING
-!define MUI_ICON "D:\Work\Demo\RMES\zebra_print\xp.resin.print\Assets\Images\icon.ico"
+!define MUI_ICON "D:\Work\Demo\MonitorList\monitor_list\monitor.list\Assets\Images\icon.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
 ; 欢迎页面
@@ -26,7 +26,7 @@ SetCompressor lzma
 ; 安装过程页面
 !insertmacro MUI_PAGE_INSTFILES
 ; 安装完成页面
-!define MUI_FINISHPAGE_RUN "$INSTDIR\Xp.Resin.Print.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\Monitor.List.exe"
 !insertmacro MUI_PAGE_FINISH
 
 ; 安装卸载过程页面
@@ -41,7 +41,7 @@ SetCompressor lzma
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "Setup.exe"
-InstallDir "$PROGRAMFILES\Xp Resin Print"
+InstallDir "$PROGRAMFILES\Monitor List"
 InstallDirRegKey HKLM "${PRODUCT_UNINST_KEY}" "UninstallString"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -50,50 +50,48 @@ BrandingText " "
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
-  File "..\xp.resin.print\bin\Release\Xp.Resin.Print.pdb"
-  CreateDirectory "$SMPROGRAMS\Xp Resin Print"
-  CreateShortCut "$SMPROGRAMS\Xp Resin Print\Xp Resin Print.lnk" "$INSTDIR\Xp.Resin.Print.exe"
-  CreateShortCut "$DESKTOP\Xp Resin Print.lnk" "$INSTDIR\Xp.Resin.Print.exe"
-  File "..\xp.resin.print\bin\Release\Xp.Resin.Print.exe.config"
-  File "..\xp.resin.print\bin\Release\Xp.Resin.Print.exe"
-  File "..\xp.resin.print\bin\Release\WpfMultiStyle.dll"
-  File "..\xp.resin.print\bin\Release\System.Windows.Interactivity.dll"
-  File "..\xp.resin.print\bin\Release\System.ValueTuple.xml"
-  File "..\xp.resin.print\bin\Release\System.ValueTuple.dll"
-  File "..\xp.resin.print\bin\Release\NLog.xml"
-  File "..\xp.resin.print\bin\Release\NLog.dll"
-  File "..\xp.resin.print\bin\Release\NLog.config"
-  File "..\xp.resin.print\bin\Release\Newtonsoft.Json.xml"
-  File "..\xp.resin.print\bin\Release\Newtonsoft.Json.dll"
-  File "..\xp.resin.print\bin\Release\HandyControl.xml"
-  File "..\xp.resin.print\bin\Release\HandyControl.dll"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.xml"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Platform.xml"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Platform.pdb"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Platform.dll"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.pdb"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Extras.xml"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Extras.pdb"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.Extras.dll"
-  File "..\xp.resin.print\bin\Release\GalaSoft.MvvmLight.dll"
-  File "..\xp.resin.print\bin\Release\EQuality.Tools.dll"
-  File "..\xp.resin.print\bin\Release\CommonServiceLocator.dll"
-  File "..\xp.resin.print\bin\Release\Fnthex32.dll"
-  File /r "..\xp.resin.print\bin\Release\*.*"
+  File "..\monitor.list\bin\Release\Monitor.List.pdb"
+  CreateDirectory "$SMPROGRAMS\Monitor List"
+  CreateShortCut "$SMPROGRAMS\Monitor List\Monitor List.lnk" "$INSTDIR\Monitor.List.exe"
+  CreateShortCut "$DESKTOP\Monitor List.lnk" "$INSTDIR\Monitor.List.exe"
+  File "..\monitor.list\bin\Release\Monitor.List.exe.config"
+  File "..\monitor.list\bin\Release\Monitor.List.exe"
+  File "..\monitor.list\bin\Release\WpfMultiStyle.dll"
+  File "..\monitor.list\bin\Release\System.Windows.Interactivity.dll"
+  File "..\monitor.list\bin\Release\System.ValueTuple.xml"
+  File "..\monitor.list\bin\Release\System.ValueTuple.dll"
+  File "..\monitor.list\bin\Release\NLog.xml"
+  File "..\monitor.list\bin\Release\NLog.dll"
+  File "..\monitor.list\bin\Release\NLog.config"
+  File "..\monitor.list\bin\Release\Newtonsoft.Json.xml"
+  File "..\monitor.list\bin\Release\Newtonsoft.Json.dll"
+  File "..\monitor.list\bin\Release\HandyControl.xml"
+  File "..\monitor.list\bin\Release\HandyControl.dll"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.xml"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Platform.xml"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Platform.pdb"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Platform.dll"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.pdb"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Extras.xml"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Extras.pdb"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.Extras.dll"
+  File "..\monitor.list\bin\Release\GalaSoft.MvvmLight.dll"
+  File "..\monitor.list\bin\Release\CommonServiceLocator.dll"
+  File /r "..\monitor.list\bin\Release\*.*"
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\Xp Resin Print\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  CreateShortCut "$SMPROGRAMS\Xp Resin Print\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\Monitor List\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\Monitor List\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\Xp.Resin.Print.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\Monitor.List.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\Xp.Resin.Print.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\Monitor.List.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
@@ -107,8 +105,6 @@ Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\CommonServiceLocator.dll"
-  Delete "$INSTDIR\Fnthex32.dll"
-  Delete "$INSTDIR\EQuality.Tools.dll"
   Delete "$INSTDIR\GalaSoft.MvvmLight.dll"
   Delete "$INSTDIR\GalaSoft.MvvmLight.Extras.dll"
   Delete "$INSTDIR\GalaSoft.MvvmLight.Extras.pdb"
@@ -129,16 +125,16 @@ Section Uninstall
   Delete "$INSTDIR\System.ValueTuple.xml"
   Delete "$INSTDIR\System.Windows.Interactivity.dll"
   Delete "$INSTDIR\WpfMultiStyle.dll"
-  Delete "$INSTDIR\Xp.Resin.Print.exe"
-  Delete "$INSTDIR\Xp.Resin.Print.exe.config"
-  Delete "$INSTDIR\Xp.Resin.Print.pdb"
+  Delete "$INSTDIR\Monitor.List.exe"
+  Delete "$INSTDIR\Monitor.List.exe.config"
+  Delete "$INSTDIR\Monitor.List.pdb"
 
-  Delete "$SMPROGRAMS\Xp Resin Print\Uninstall.lnk"
-  Delete "$SMPROGRAMS\Xp Resin Print\Website.lnk"
-  Delete "$DESKTOP\Xp Resin Print.lnk"
-  Delete "$SMPROGRAMS\Xp Resin Print\Xp Resin Print.lnk"
+  Delete "$SMPROGRAMS\Monitor List\Uninstall.lnk"
+  Delete "$SMPROGRAMS\Monitor List\Website.lnk"
+  Delete "$DESKTOP\Monitor List.lnk"
+  Delete "$SMPROGRAMS\Monitor List\Monitor List.lnk"
 
-  RMDir "$SMPROGRAMS\Xp Resin Print"
+  RMDir "$SMPROGRAMS\Monitor List"
   
   RMDir /r "$INSTDIR\logs"
   RMDir /r "$INSTDIR\tr"

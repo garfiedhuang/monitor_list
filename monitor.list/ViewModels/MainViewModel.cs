@@ -425,8 +425,11 @@ namespace Monitor.List.ViewsModels {
             var approvalUnit= string.Empty;
             var noticeStartTime = DateTime.MinValue;
             var noticeEndTime = DateTime.MinValue;
+            var skipCollection = false;
 
             var jobInterval = Convert.ToInt32(_configModels.FirstOrDefault(w => w.Category == "SYSTEM" && w.ConfigKey == "MONITOR_JOB_INTERVAL")?.ConfigValue ?? "3");
+
+            jobInterval = 3600;//写死10分钟间隔 add by garfield 20230306
 
             while (true) {
                 try {
@@ -446,6 +449,10 @@ namespace Monitor.List.ViewsModels {
                     foreach (var dr in _htmlData) {
                         try {
 
+                            msg = string.Empty;
+                            skipCollection = false;
+
+
                             //<td>吴瑶</td><td>广州凯之源科技有限公司</td><td class="text-center">同意</td><td>广州市荔湾区人力资源和社会保障局</td><td>2023年3月3日 18:43</td><td>2023年3月10日 18:43</td>                     
                             var reg =new Regex("(?<=<td>)(.*?)(?=</td>)", RegexOptions.IgnoreCase);
                             var ms = reg.Matches(dr);
@@ -459,6 +466,8 @@ namespace Monitor.List.ViewsModels {
 
                             if (_maxCollectTime > noticeStartTime) {//add by garfield 20230306
 
+                                msg = $"{fullName}|{unit}，已存在数据库，跳过采集！";
+                                skipCollection = true;
                                 continue;
                             }
 
@@ -491,10 +500,15 @@ namespace Monitor.List.ViewsModels {
                         }
 
                         finally {
-                            //刷新界面数据状态
-                            System.Windows.Application.Current.Dispatcher.Invoke(() => {
-                                this.Query();
-                            });
+
+                            if (!skipCollection)
+                            {
+                                //刷新界面数据状态
+                                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    this.Query();
+                                });
+                            }
 
                             this.SetTips(msg);
                         }
