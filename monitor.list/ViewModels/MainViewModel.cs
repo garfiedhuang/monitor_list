@@ -359,14 +359,6 @@ namespace Monitor.List.ViewsModels {
 
                 _toPage += _toPage;
 
-                if (_toPage != 0 && _totalPages != 0 && _toPage > _totalPages)
-                {
-                    _toPage = 0;
-                    _totalPages = 0;
-
-                    return;
-                }
-
                 PostVars.Add("ToPage", _toPage.ToString());
 
 
@@ -452,6 +444,14 @@ namespace Monitor.List.ViewsModels {
                     _htmlData.Clear();
                     while (_toPage == 0 || _toPage <= _totalPages) {
                         GetPageContent();
+
+                        if (_toPage > _totalPages)
+                        {
+                            _toPage = 0;
+                            _totalPages = 0;
+
+                            break;
+                        }
                     }
 
                     if (_htmlData == null || _htmlData.Count == 0) {
