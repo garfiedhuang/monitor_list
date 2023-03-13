@@ -359,7 +359,7 @@ namespace Monitor.List.ViewsModels {
 
                 _toPage += _toPage;
 
-                if (_toPage != 0 && _toPage > _totalPages)
+                if (_toPage != 0 && _totalPages != 0 && _toPage > _totalPages)
                 {
                     _toPage = 0;
                     _totalPages = 0;
