@@ -349,21 +349,25 @@ namespace Monitor.List.ViewsModels {
         private void GetPageContent() {
 
             using (System.Net.WebClient WebClientObj = new System.Net.WebClient()) {
-                System.Collections.Specialized.NameValueCollection PostVars = new System.Collections.Specialized.NameValueCollection();
-                PostVars.Add("__VIEWSTATE", _viewState);
-                PostVars.Add("__EVENTVALIDATION", "");
-                PostVars.Add("__EVENTTARGET", "LinkButton1");
-                PostVars.Add("__EVENTARGUMENT", "");
+                System.Collections.Specialized.NameValueCollection PostVars = new System.Collections.Specialized.NameValueCollection
+                {
+                    { "__VIEWSTATE", _viewState },
+                    { "__EVENTVALIDATION", "" },
+                    { "__EVENTTARGET", "LinkButton1" },
+                    { "__EVENTARGUMENT", "" }
+                };
 
-                if (Convert.ToInt32(_toPage) > _totalPages) {
-                    _toPage = "0";
+                _toPage += _toPage;
+
+                if (_toPage != 0 && _toPage > _totalPages)
+                {
+                    _toPage = 0;
                     _totalPages = 0;
-                }
-                else {
-                    _toPage = (Convert.ToInt32(_toPage) + 1).ToString();
+
+                    return;
                 }
 
-                PostVars.Add("ToPage", _toPage);
+                PostVars.Add("ToPage", _toPage.ToString());
 
 
                 WebClientObj.Headers.Add("ContentType", "application/x-www-form-urlencoded");
@@ -383,11 +387,11 @@ namespace Monitor.List.ViewsModels {
             if (!string.IsNullOrEmpty(result)) {
                 var regViewState = new Regex("(?<=<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=\")(.*?)(?=\" />)", RegexOptions.IgnoreCase);
                 var ms = regViewState.Matches(result);
-                _viewState = ms[0].Value;
+                _viewState = ms[0].Value;//视图状态
 
                 var regTotalPages = new Regex("(?<=共<span id=\"PageCount\">)(.*?)(?=</span>页)", RegexOptions.IgnoreCase);
                 var ms2 = regTotalPages.Matches(result);
-                _totalPages = Convert.ToInt32(ms2[0].Value);
+                _totalPages = Convert.ToInt32(ms2[0].Value);//总页数
 
                 var regHtmlData = new Regex("(?<=</tr><tr class=\"List(.*?)\">)([\\s\\S]+?)(?=</tr>)", RegexOptions.None);
                 var ms3 = regHtmlData.Matches(result);
@@ -414,9 +418,8 @@ namespace Monitor.List.ViewsModels {
         }
 
         private static string _viewState = "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";
-        private static string _toPage = "0";
+        private static int _toPage = 0;
         private static int _totalPages = 0;
-        //private static List<string> _htmlData = new List<string>();
 
         private static ConcurrentDictionary<string, DateTime> _htmlData = new ConcurrentDictionary<string, DateTime>();
         private static ConcurrentDictionary<string, string> _totalData=new ConcurrentDictionary<string, string>();
@@ -447,7 +450,7 @@ namespace Monitor.List.ViewsModels {
 
                     //获取所有分页数据
                     _htmlData.Clear();
-                    while (Convert.ToInt32(_toPage) == 0 || Convert.ToInt32(_toPage) <= _totalPages) {
+                    while (_toPage == 0 || _toPage <= _totalPages) {
                         GetPageContent();
                     }
 
