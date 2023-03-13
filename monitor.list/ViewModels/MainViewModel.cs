@@ -437,7 +437,7 @@ namespace Monitor.List.ViewsModels {
 
             var jobInterval = Convert.ToInt32(_configModels.FirstOrDefault(w => w.Category == "SYSTEM" && w.ConfigKey == "MONITOR_JOB_INTERVAL")?.ConfigValue ?? "3");
 
-            jobInterval = 3600;//–¥À¿10∑÷÷”º‰∏Ù add by garfield 20230306
+            jobInterval = 300;//–¥À¿5∑÷÷”º‰∏Ù add by garfield 20230306
 
             while (true) {
                 try {
