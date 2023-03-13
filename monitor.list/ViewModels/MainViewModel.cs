@@ -357,7 +357,7 @@ namespace Monitor.List.ViewsModels {
                     { "__EVENTARGUMENT", "" }
                 };
 
-                _toPage += _toPage;
+                _toPage += 1;
 
                 PostVars.Add("ToPage", _toPage.ToString());
 
